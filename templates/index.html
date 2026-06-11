@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SorTrick</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>SorTrick</h1>
+            <p>Sorting Performance Analysis System</p>
+        </div>
+
+        <div class="controls">
+
+            <label for="arraySize">
+                Array Size
+            </label>
+
+            <select id="arraySize">
+                <option value="100">100</option>
+                <option value="500">500</option>
+                <option value="1000" selected>1000</option>
+                <option value="5000">5000</option>
+            </select>
+
+        </div>
+
+        <textarea
+            id="numbers"
+            placeholder="Enter numbers separated by commas or generate a random array">
+        </textarea>
+
+        <div class="buttons">
+
+            <button onclick="generateRandomArray()">
+                Generate Random Array
+            </button>
+
+            <button onclick="compareSorts()">
+                Compare Algorithms
+            </button>
+
+        </div>
+
+        <div id="stats"></div>
+
+        <div id="result"></div>
+
+        <div id="sortedOutput"></div>
+
+        <div class="chart-section">
+            <canvas id="chart"></canvas>
+        </div>
+
+        <div class="complexity-section">
+
+            <h2>Complexity Analysis</h2>
+
+            <table>
+
+                <tr>
+                    <th>Algorithm</th>
+                    <th>Best Case</th>
+                    <th>Average Case</th>
+                    <th>Worst Case</th>
+                </tr>
+
+                <tr>
+                    <td>Bubble Sort</td>
+                    <td>O(n)</td>
+                    <td>O(n²)</td>
+                    <td>O(n²)</td>
+                </tr>
+
+                <tr>
+                    <td>Merge Sort</td>
+                    <td>O(n log n)</td>
+                    <td>O(n log n)</td>
+                    <td>O(n log n)</td>
+                </tr>
+
+                <tr>
+                    <td>Quick Sort</td>
+                    <td>O(n log n)</td>
+                    <td>O(n log n)</td>
+                    <td>O(n²)</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <footer>
+            Computational Foundations of AI Project
+        </footer>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
