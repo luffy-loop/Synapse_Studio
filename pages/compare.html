@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse | Compare Algorithms</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/compare.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h1>Synapse</h1>
+            <p>Algorithm Studio</p>
+        </div>
+
+        <nav>
+            <a href="../index.html">Dashboard</a>
+            <a href="sorting.html">Sorting</a>
+            <a href="search.html">Search</a>
+            <a href="searching.html">Searching</a>
+            <a href="compare.html" class="active">Compare</a>
+            <a href="library.html">Library</a>
+            <a href="about.html">About</a>
+        </nav>
+
+    </aside>
+
+    <main class="main-content">
+
+        <section class="page-header">
+            <h1>Algorithm Comparison Center</h1>
+            <p>
+                Compare performance, execution time and complexity of algorithms.
+            </p>
+        </section>
+
+        <section class="controls-grid">
+
+            <div class="glass-card">
+
+                <label>Comparison Type</label>
+
+                <div class="type-selector">
+
+                    <button
+                        type="button"
+                        class="type-btn active"
+                        onclick="selectType('sorting', this)">
+                        Sorting
+                    </button>
+
+                    <button
+                        type="button"
+                        class="type-btn"
+                        onclick="selectType('searching', this)">
+                        Searching
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="glass-card">
+
+                <label>Dataset Size</label>
+
+                <input
+                    type="number"
+                    id="arraySize"
+                    value="100"
+                    min="10"
+                    max="5000">
+
+            </div>
+
+        </section>
+
+        <section class="dataset-card">
+
+            <h2>Dataset Preview</h2>
+
+            <p id="datasetPreview">
+                Generate a dataset to begin...
+            </p>
+
+        </section>
+
+        <section class="action-buttons">
+
+            <button onclick="generateDataset()">
+                Generate Dataset
+            </button>
+
+            <button onclick="runComparison()">
+                Run Comparison
+            </button>
+
+        </section>
+
+        <section class="results-table">
+
+            <h2>Performance Results</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>Execution Time</th>
+                        <th>Complexity</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="resultsBody">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <section class="winner-card">
+
+            <h2>Fastest Algorithm</h2>
+
+            <h1 id="winnerName">
+                -
+            </h1>
+
+            <p id="winnerTime">
+                -
+            </p>
+
+        </section>
+
+        <section class="chart-card">
+
+            <h2>Performance Chart</h2>
+
+            <div id="chartContainer">
+
+            </div>
+
+        </section>
+
+        <section class="complexity-card">
+
+            <h2>Complexity Analysis</h2>
+
+            <div id="complexityGrid">
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="../js/compare.js"></script>
+
+</body>
+</html>

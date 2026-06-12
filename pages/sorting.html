@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse | Sorting Algorithms</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/sorting.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h1>Synapse</h1>
+            <p>Algorithm Studio</p>
+        </div>
+
+        <nav>
+            <a href="../index.html">Dashboard</a>
+            <a href="sorting.html" class="active">Sorting</a>
+            <a href="search.html">Search</a>
+            <a href="searching.html">Searching</a>
+            <a href="compare.html">Compare</a>
+            <a href="library.html">Library</a>
+            <a href="about.html">About</a>
+        </nav>
+
+    </aside>
+
+    <main class="main-content">
+
+        <section class="sorting-header">
+
+            <h1>Sorting Algorithms</h1>
+
+            <p>
+                Visualize, analyze and compare sorting algorithms
+                step by step.
+            </p>
+
+        </section>
+
+        <section class="sorting-controls">
+
+            <div class="control-card">
+
+                <label>Algorithm</label>
+
+                <select id="algorithm">
+
+                    <option>Bubble Sort</option>
+                    <option>Selection Sort</option>
+                    <option>Insertion Sort</option>
+                    <option>Merge Sort</option>
+                    <option>Quick Sort</option>
+
+                </select>
+
+            </div>
+
+            <div class="control-card">
+
+                <label>Array Size</label>
+
+                <select id="arraySize">
+
+                    <option>10</option>
+                    <option>20</option>
+                    <option>30</option>
+                    <option>50</option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+        <section class="input-section">
+
+            <h2>Input Array</h2>
+
+            <textarea
+                id="arrayInput"
+                rows="3"
+                placeholder="Example: 5,2,8,1,4"></textarea>
+
+            <div class="buttons">
+
+                <button onclick="generateRandomArray()">
+                    Generate Random
+                </button>
+
+                <button onclick="visualizeSort()">
+                    Visualize
+                </button>
+
+                <button onclick="resetSorting()">
+                    Reset
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="visualizer">
+
+            <h2>Sorting Visualization</h2>
+
+            <p class="section-desc">
+                Watch how elements move and rearrange during sorting.
+            </p>
+
+            <div id="bars-container"></div>
+
+            <div class="live-status">
+
+                <h3>Current Operation</h3>
+
+                <p id="operation">
+                    Waiting for visualization...
+                </p>
+
+            </div>
+
+        </section>
+
+        <section class="array-results">
+
+            <div class="result-card">
+
+                <h3>Original Array</h3>
+
+                <p id="originalArray">
+                    Waiting...
+                </p>
+
+            </div>
+
+            <div class="result-card">
+
+                <h3>Sorted Array</h3>
+
+                <p id="sortedArray">
+                    Waiting...
+                </p>
+
+            </div>
+
+        </section>
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <h3>Comparisons</h3>
+
+                <span id="comparisons">
+                    0
+                </span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Swaps</h3>
+
+                <span id="swaps">
+                    0
+                </span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Execution Time</h3>
+
+                <span id="time">
+                    0 ms
+                </span>
+
+            </div>
+
+        </section>
+
+        <section class="algorithm-explanation">
+
+            <h2>Algorithm Explanation</h2>
+
+            <div id="algorithmInfo">
+
+                Select an algorithm to view details.
+
+            </div>
+
+        </section>
+
+        <section class="performance-insights">
+
+            <h2>Performance Insights</h2>
+
+            <div class="insight-grid">
+
+                <div class="insight-item">
+
+                    <h4>Algorithm</h4>
+
+                    <p id="insightAlgorithm">
+                        -
+                    </p>
+
+                </div>
+
+                <div class="insight-item">
+
+                    <h4>Efficiency</h4>
+
+                    <p id="efficiency">
+                        -
+                    </p>
+
+                </div>
+
+                <div class="insight-item">
+
+                    <h4>Input Size</h4>
+
+                    <p id="inputSize">
+                        -
+                    </p>
+
+                </div>
+
+                <div class="insight-item">
+
+                    <h4>Status</h4>
+
+                    <p id="statusText">
+                        Ready
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="complexity-card">
+
+            <h2>Complexity Analysis</h2>
+
+            <div class="complexity-grid">
+
+                <div class="complexity-item">
+
+                    <h4>Best Case</h4>
+
+                    <p id="bestCase">
+                        O(n)
+                    </p>
+
+                </div>
+
+                <div class="complexity-item">
+
+                    <h4>Average Case</h4>
+
+                    <p id="avgCase">
+                        O(n²)
+                    </p>
+
+                </div>
+
+                <div class="complexity-item">
+
+                    <h4>Worst Case</h4>
+
+                    <p id="worstCase">
+                        O(n²)
+                    </p>
+
+                </div>
+
+                <div class="complexity-item">
+
+                    <h4>Space Complexity</h4>
+
+                    <p id="spaceCase">
+                        O(1)
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="../js/sorting.js"></script>
+
+</body>
+</html>
