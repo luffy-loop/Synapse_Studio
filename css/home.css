@@ -1,0 +1,104 @@
+.hero{
+    text-align:center;
+    margin-top:50px;
+}
+
+.hero h1{
+    font-size:60px;
+    color:#0f172a;
+}
+
+.hero p{
+    margin-top:20px;
+    color:#64748b;
+    font-size:20px;
+}
+
+.cta-btn{
+    display:inline-block;
+
+    margin-top:30px;
+
+    text-decoration:none;
+
+    padding:15px 30px;
+
+    background:#0f172a;
+
+    color:white;
+
+    border-radius:15px;
+}
+
+.cards{
+    margin-top:70px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:30px;
+}
+
+.card{
+    background:
+    rgba(255,255,255,0.6);
+
+    backdrop-filter:blur(15px);
+
+    padding:30px;
+
+    border-radius:25px;
+
+    min-height:220px;
+}
+
+.card h2{
+    margin-bottom:20px;
+}
+
+.card p{
+    color:#64748b;
+    line-height:1.7;
+}
+
+.card a{
+    display:inline-block;
+
+    margin-top:25px;
+
+    text-decoration:none;
+
+    color:#2563eb;
+
+    font-weight:bold;
+}
+
+.stats{
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:20px;
+}
+
+.stat-box{
+    background:
+    rgba(255,255,255,0.6);
+
+    backdrop-filter:blur(15px);
+
+    padding:25px;
+
+    border-radius:20px;
+
+    text-align:center;
+}
+
+.stat-box h2{
+    font-size:40px;
+}

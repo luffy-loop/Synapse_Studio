@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Synapse | Algorithm Library</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/library.css">
+
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h1>Synapse</h1>
+            <p>Algorithm Studio</p>
+        </div>
+
+        <nav>
+
+            <a href="../index.html">Dashboard</a>
+            <a href="sorting.html">Sorting</a>
+            <a href="search.html">Search</a>
+            <a href="searching.html">Searching</a>
+            <a href="compare.html">Compare</a>
+            <a href="library.html" class="active">Library</a>
+            <a href="about.html">About</a>
+
+        </nav>
+
+    </aside>
+
+    <main class="main-content">
+
+        <section class="page-header">
+
+            <h1>Algorithm Library</h1>
+
+            <p>
+                Explore definitions, complexities, advantages and applications.
+            </p>
+
+        </section>
+
+        <section class="search-section">
+
+            <input
+                type="text"
+                id="searchBox"
+                placeholder="Search algorithms..."
+                onkeyup="filterAlgorithms()">
+
+        </section>
+
+        <section class="library-layout">
+
+            <div class="algorithm-list">
+
+                <h2>Algorithms</h2>
+
+                <div id="algorithmList">
+
+                    <button onclick="showAlgorithm('bubble')">
+                        Bubble Sort
+                    </button>
+
+                    <button onclick="showAlgorithm('selection')">
+                        Selection Sort
+                    </button>
+
+                    <button onclick="showAlgorithm('insertion')">
+                        Insertion Sort
+                    </button>
+
+                    <button onclick="showAlgorithm('merge')">
+                        Merge Sort
+                    </button>
+
+                    <button onclick="showAlgorithm('quick')">
+                        Quick Sort
+                    </button>
+
+                    <button onclick="showAlgorithm('bfs')">
+                        BFS
+                    </button>
+
+                    <button onclick="showAlgorithm('dfs')">
+                        DFS
+                    </button>
+
+                    <button onclick="showAlgorithm('ucs')">
+                        UCS
+                    </button>
+
+                    <button onclick="showAlgorithm('greedy')">
+                        Greedy Search
+                    </button>
+
+                    <button onclick="showAlgorithm('astar')">
+                        A*
+                    </button>
+
+                    <button onclick="showAlgorithm('linear')">
+                        Linear Search
+                    </button>
+
+                    <button onclick="showAlgorithm('binary')">
+                        Binary Search
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="algorithm-details">
+
+                <h2 id="algoTitle">
+                    Select an Algorithm
+                </h2>
+
+                <div id="algoContent">
+
+                    Click an algorithm from the left panel.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="../js/library.js"></script>
+
+</body>
+
+</html>

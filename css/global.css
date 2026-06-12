@@ -1,0 +1,95 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    linear-gradient(
+        135deg,
+        #dce8ed,
+        #eef2ff,
+        #f4ecff
+    );
+}
+
+.app-container{
+    display:flex;
+    min-height:100vh;
+}
+
+/* STICKY SIDEBAR */
+.sidebar{
+    width:260px;
+
+    background:
+    rgba(255,255,255,0.55);
+
+    backdrop-filter:blur(20px);
+
+    border-right:
+    1px solid rgba(255,255,255,0.4);
+
+    padding:30px;
+
+    position:sticky;
+    top:0;
+
+    height:100vh;
+    overflow-y:auto;
+}
+
+.logo{
+    margin-bottom:50px;
+}
+
+.logo h1{
+    color:#1e293b;
+    font-size:3rem;
+    font-weight:700;
+}
+
+.logo p{
+    color:#64748b;
+    font-size:1.2rem;
+}
+
+nav{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#334155;
+
+    padding:15px 20px;
+
+    border-radius:15px;
+
+    transition:0.3s ease;
+
+    font-size:1.1rem;
+}
+
+nav a:hover{
+    background:white;
+    transform:translateX(5px);
+}
+
+nav a.active{
+    background:white;
+    font-weight:bold;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.05);
+}
+
+.main-content{
+    flex:1;
+    padding:50px;
+}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse | Search Algorithms</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/search.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h1>Synapse</h1>
+            <p>Algorithm Studio</p>
+        </div>
+
+        <nav>
+            <a href="../index.html">Dashboard</a>
+            <a href="sorting.html">Sorting</a>
+            <a href="search.html" class="active">Search</a>
+            <a href="searching.html">Searching</a>
+            <a href="compare.html">Compare</a>
+            <a href="library.html">Library</a>
+            <a href="about.html">About</a>
+        </nav>
+
+    </aside>
+
+    <main class="main-content">
+
+        <section class="page-header">
+
+            <h1>Search Algorithms</h1>
+
+            <p>
+                Explore graph traversal and pathfinding algorithms through interactive visualizations.
+            </p>
+
+        </section>
+
+        <section class="controls-grid">
+
+            <div class="glass-card">
+
+                <label>Algorithm</label>
+
+                <select id="algorithm">
+
+                    <option>BFS</option>
+                    <option>DFS</option>
+                    <option>UCS</option>
+                    <option>Greedy Search</option>
+                    <option>A*</option>
+
+                </select>
+
+            </div>
+
+            <div class="glass-card">
+
+                <label>Graph Presets</label>
+
+                <div class="preset-buttons">
+
+                    <button onclick="loadTreeGraph()">
+                        Tree Graph
+                    </button>
+
+                    <button onclick="loadBinaryGraph()">
+                        Binary Tree
+                    </button>
+
+                    <button onclick="loadCycleGraph()">
+                        Cycle Graph
+                    </button>
+
+                    <button onclick="generateRandomGraph()">
+                        Random Graph
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="graph-input">
+
+            <h2>Graph Input</h2>
+
+            <textarea
+                id="graphInput"
+                placeholder="A-B&#10;A-C&#10;B-D&#10;C-E"></textarea>
+
+        </section>
+
+        <section class="node-grid">
+
+            <div class="glass-card">
+
+                <label>Start Node</label>
+
+                <input
+                    type="text"
+                    id="startNode"
+                    placeholder="A">
+
+            </div>
+
+            <div class="glass-card">
+
+                <label>Goal Node</label>
+
+                <input
+                    type="text"
+                    id="goalNode"
+                    placeholder="E">
+
+            </div>
+
+        </section>
+
+        <section class="action-buttons">
+
+            <button onclick="runSearch()">
+                Run Algorithm
+            </button>
+
+        </section>
+
+        <section class="visualizer-card">
+
+            <h2>Traversal Order</h2>
+
+            <div id="traversalOutput">
+
+                Waiting for execution...
+
+            </div>
+
+        </section>
+
+        <section class="results-grid">
+
+            <div class="result-card">
+
+                <h3>Visited Nodes</h3>
+
+                <span id="visitedCount">0</span>
+
+            </div>
+
+            <div class="result-card">
+
+                <h3>Path Cost</h3>
+
+                <span id="pathCost">0</span>
+
+            </div>
+
+            <div class="result-card">
+
+                <h3>Execution Time</h3>
+
+                <span id="executionTime">0 ms</span>
+
+            </div>
+
+        </section>
+
+        <section class="algorithm-details">
+
+            <h2>Algorithm Explanation</h2>
+
+            <div id="algorithmExplanation">
+
+                Select an algorithm to view explanation.
+
+            </div>
+
+        </section>
+
+        <section class="algorithm-details">
+
+            <h2>Graph Information</h2>
+
+            <div id="graphInfo">
+
+                Load a graph and execute an algorithm.
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="../js/search.js"></script>
+
+</body>
+
+</html>
