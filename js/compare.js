@@ -431,7 +431,7 @@ function renderChart(results)
     document.getElementById(
         "chartContainer"
     );
-
+    
     chart.innerHTML = "";
 
     const maxTime =

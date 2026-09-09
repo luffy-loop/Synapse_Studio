@@ -345,7 +345,7 @@ function runSearch() {
         "traversalOutput"
     ).innerText =
         traversal.join(" → ");
-
+    drawGraph(graph, traversal);
     document.getElementById(
         "visitedCount"
     ).innerText =
@@ -382,3 +382,171 @@ document
 );
 
 window.onload = updateExplanation;
+
+// =========================================================
+// GRAPH VISUALIZATION
+// =========================================================
+
+function drawGraph(graph, traversal = []) {
+    const canvas = document.getElementById("graphCanvas");
+
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+
+    const rect = canvas.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    const nodes = Object.keys(graph);
+
+    if (nodes.length === 0) return;
+
+    // -----------------------------------------------------
+    // NODE POSITIONS
+    // -----------------------------------------------------
+
+    const positions = {};
+
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    const radius = Math.min(width, height) * 0.32;
+
+    nodes.forEach((node, index) => {
+
+        const angle =
+            -Math.PI / 2 +
+            (2 * Math.PI * index) / nodes.length;
+
+        positions[node] = {
+            x: centerX + radius * Math.cos(angle),
+            y: centerY + radius * Math.sin(angle)
+        };
+
+    });
+
+    // -----------------------------------------------------
+    // DRAW EDGES
+    // -----------------------------------------------------
+
+    const drawnEdges = new Set();
+
+    nodes.forEach(node => {
+
+        graph[node].forEach(neighbor => {
+
+            const edgeKey =
+                [node, neighbor].sort().join("-");
+
+            if (drawnEdges.has(edgeKey)) return;
+
+            drawnEdges.add(edgeKey);
+
+            const start = positions[node];
+            const end = positions[neighbor];
+
+            if (!start || !end) return;
+
+            ctx.beginPath();
+
+            ctx.moveTo(start.x, start.y);
+            ctx.lineTo(end.x, end.y);
+
+            ctx.strokeStyle = "rgba(139, 92, 246, 0.28)";
+            ctx.lineWidth = 2;
+
+            ctx.stroke();
+
+        });
+
+    });
+
+    // -----------------------------------------------------
+    // DRAW NODES
+    // -----------------------------------------------------
+
+    nodes.forEach(node => {
+
+        const { x, y } = positions[node];
+
+        const isStart =
+            node === document.getElementById("startNode").value.trim();
+
+        const isGoal =
+            node === document.getElementById("goalNode").value.trim();
+
+        const traversalIndex =
+            traversal.indexOf(node);
+
+        let fill = "#12161f";
+        let stroke = "rgba(139, 92, 246, 0.55)";
+
+        if (traversalIndex !== -1) {
+            fill = "#6d3edb";
+            stroke = "#a78bfa";
+        }
+
+        if (isStart) {
+            fill = "#8b5cf6";
+            stroke = "#c4b5fd";
+        }
+
+        if (isGoal) {
+            fill = "#34d399";
+            stroke = "#a7f3d0";
+        }
+
+        // Glow
+        ctx.beginPath();
+        ctx.arc(x, y, 30, 0, Math.PI * 2);
+
+        ctx.fillStyle = fill;
+        ctx.shadowColor = stroke;
+        ctx.shadowBlur = 18;
+
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+
+        // Border
+        ctx.beginPath();
+        ctx.arc(x, y, 30, 0, Math.PI * 2);
+
+        ctx.strokeStyle = stroke;
+        ctx.lineWidth = 2;
+
+        ctx.stroke();
+
+        // Node label
+        ctx.fillStyle = "#f4f7fb";
+        ctx.font = "700 16px Inter, system-ui, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        ctx.fillText(node, x, y);
+
+        // Traversal number
+        if (traversalIndex !== -1) {
+
+            ctx.fillStyle = "#b5bdcb";
+            ctx.font = "600 11px Inter, system-ui, sans-serif";
+
+            ctx.fillText(
+                `#${traversalIndex + 1}`,
+                x,
+                y + 44
+            );
+        }
+
+    });
+
+}

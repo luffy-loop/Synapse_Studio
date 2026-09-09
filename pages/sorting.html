@@ -90,19 +90,57 @@
 
             <div class="buttons">
 
-                <button onclick="generateRandomArray()">
-                    Generate Random
-                </button>
+    <button onclick="generateRandomArray()">
+        Generate Random
+    </button>
 
-                <button onclick="visualizeSort()">
-                    Visualize
-                </button>
+    <button onclick="visualizeSort()">
+        Visualize
+    </button>
 
-                <button onclick="resetSorting()">
-                    Reset
-                </button>
+    <button onclick="resetSorting()">
+        Reset
+    </button>
 
-            </div>
+</div>
+
+<div class="playback-controls">
+
+    <div class="playback-buttons">
+
+        <button id="playButton" onclick="resumeSorting()">
+            ▶ Play
+        </button>
+
+        <button id="pauseButton" onclick="pauseSorting()">
+            ⏸ Pause
+        </button>
+
+        <button id="stepButton" onclick="stepSorting()">
+            → Step
+        </button>
+
+    </div>
+
+    <div class="speed-control">
+
+        <label for="speedControl">
+            Animation Speed
+        </label>
+
+        <input
+            type="range"
+            id="speedControl"
+            min="50"
+            max="1000"
+            value="150"
+        >
+
+        <span id="speedValue">150ms</span>
+
+    </div>
+
+</div>
 
         </section>
 
