@@ -618,3 +618,126 @@
         transition: none;
     }
 }
+
+/* =========================================
+   PLAYBACK CONTROLS
+   ========================================= */
+
+.playback-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    margin-top: 18px;
+    padding: 18px 20px;
+
+    background: rgba(8, 10, 15, 0.55);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.playback-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.playback-buttons button {
+    padding: 10px 16px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+
+    background: rgba(139, 92, 246, 0.08);
+    color: var(--text-soft);
+
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.playback-buttons button:hover {
+    transform: translateY(-2px);
+
+    background: rgba(139, 92, 246, 0.16);
+    border-color: rgba(139, 92, 246, 0.32);
+
+    color: var(--text);
+}
+
+.playback-buttons button:active {
+    transform: translateY(0);
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.speed-control label {
+    color: var(--text-muted);
+
+    font-size: 0.72rem;
+    font-weight: 650;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+.speed-control input[type="range"] {
+    width: 150px;
+
+    accent-color: var(--primary);
+
+    cursor: pointer;
+}
+
+#speedValue {
+    min-width: 52px;
+
+    color: var(--primary-hover);
+
+    font-size: 0.8rem;
+    font-weight: 650;
+
+    text-align: right;
+}
+
+@media (max-width: 700px) {
+
+    .playback-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .playback-buttons {
+        width: 100%;
+    }
+
+    .playback-buttons button {
+        flex: 1;
+    }
+
+    .speed-control {
+        justify-content: space-between;
+    }
+
+    .speed-control input[type="range"] {
+        flex: 1;
+    }
+}

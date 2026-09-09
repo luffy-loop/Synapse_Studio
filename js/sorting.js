@@ -1,3 +1,8 @@
+let isPaused = false;
+let pauseResolver = null;
+let stepMode = false;
+let stepResolver = null;
+let isSorting = false;
 let currentArray = [];
 
 const explanations = {
@@ -148,7 +153,11 @@ function visualizeSort()
     document.getElementById(
         "algorithm"
     ).value;
+    isSorting = true;
+stepMode = false;
 
+document.getElementById("statusText").innerText =
+    "Running";
     switch(algo)
     {
         case "Bubble Sort":
@@ -876,12 +885,22 @@ function updateComplexity()
     data[3];
 }
 
-function sleep(ms)
+async function sleep(ms)
 {
-    return new Promise(
-        resolve =>
-        setTimeout(resolve, ms)
-    );
+    await waitIfPaused();
+
+    if (stepMode)
+    {
+        return new Promise(resolve =>
+        {
+            stepResolver = resolve;
+        });
+    }
+
+    return new Promise(resolve =>
+    {
+        setTimeout(resolve, animationSpeed);
+    });
 }
 
 function updateBars(arr)
@@ -927,8 +946,12 @@ updateComplexity;
 
 function resetSorting()
 {
+    isPaused = false;
+    pauseResolver = null;
     currentArray = [];
-
+    isSorting = false;
+    stepMode = false;
+    stepResolver = null;
     document.getElementById(
         "arrayInput"
     ).value = "";
@@ -983,4 +1006,221 @@ function resetSorting()
     document.getElementById(
         "algorithm"
     ).value;
+    document.getElementById("statusText").innerText =
+    "Ready";
+
+document.getElementById("operation").innerText =
+    "Waiting for visualization...";
+}
+
+// =========================================
+// PLAYBACK SPEED CONTROL
+// =========================================
+
+let animationSpeed = 150;
+
+const speedControl = document.getElementById("speedControl");
+const speedValue = document.getElementById("speedValue");
+
+if (speedControl) {
+
+    speedControl.addEventListener("input", function () {
+
+        animationSpeed = Number(this.value);
+
+        if (speedValue) {
+            speedValue.innerText = `${animationSpeed}ms`;
+        }
+
+    });
+
+}
+
+// =========================================
+// PLAYBACK CONTROLS
+// =========================================
+// =========================================
+// PLAYBACK CONTROLS
+// =========================================
+
+function pauseSorting()
+{
+    isPaused = true;
+    stepMode = false;
+
+    document.getElementById("statusText").innerText =
+        "Paused";
+
+    document.getElementById("operation").innerText =
+        "Visualization Paused";
+}
+
+
+function resumeSorting()
+{
+    isPaused = false;
+    stepMode = false;
+
+    if (pauseResolver)
+    {
+        pauseResolver();
+        pauseResolver = null;
+    }
+
+    if (stepResolver)
+    {
+        stepResolver();
+        stepResolver = null;
+    }
+
+    document.getElementById("statusText").innerText =
+        "Running";
+
+    document.getElementById("operation").innerText =
+        "Resuming visualization...";
+}
+
+
+function stepSorting()
+{
+    if (!isSorting)
+{
+    document.getElementById("operation").innerText =
+        "Start a visualization first.";
+
+    return;
+}
+    isPaused = false;
+    stepMode = true;
+
+    if (pauseResolver)
+    {
+        pauseResolver();
+        pauseResolver = null;
+    }
+
+    if (stepResolver)
+    {
+        stepResolver();
+        stepResolver = null;
+    }
+
+    document.getElementById("statusText").innerText =
+        "Step Mode";
+
+    document.getElementById("operation").innerText =
+        "Advancing one step...";
+}
+
+
+// =========================================
+// PLAYBACK CONTROLS
+// =========================================
+
+function pauseSorting()
+{
+    isPaused = true;
+    stepMode = false;
+
+    document.getElementById("statusText").innerText =
+        "Paused";
+
+    document.getElementById("operation").innerText =
+        "Visualization Paused";
+}
+
+
+function resumeSorting()
+{
+    isPaused = false;
+    stepMode = false;
+
+    if (pauseResolver)
+    {
+        pauseResolver();
+        pauseResolver = null;
+    }
+
+    if (stepResolver)
+    {
+        stepResolver();
+        stepResolver = null;
+    }
+
+    document.getElementById("statusText").innerText =
+        "Running";
+
+    document.getElementById("operation").innerText =
+        "Resuming visualization...";
+}
+
+
+function stepSorting()
+{
+    isPaused = false;
+    stepMode = true;
+
+    if (pauseResolver)
+    {
+        pauseResolver();
+        pauseResolver = null;
+    }
+
+    if (stepResolver)
+    {
+        stepResolver();
+        stepResolver = null;
+    }
+
+    document.getElementById("statusText").innerText =
+        "Step Mode";
+
+    document.getElementById("operation").innerText =
+        "Advancing one step...";
+}
+
+
+function waitIfPaused()
+{
+    if (!isPaused)
+    {
+        return Promise.resolve();
+    }
+
+    return new Promise(resolve =>
+    {
+        pauseResolver = resolve;
+    });
+}
+
+
+function resumeSorting()
+{
+    isPaused = false;
+
+    if (pauseResolver)
+    {
+        pauseResolver();
+        pauseResolver = null;
+    }
+
+    document.getElementById("statusText").innerText =
+        "Running";
+
+    document.getElementById("operation").innerText =
+        "Resuming visualization...";
+}
+
+
+function waitIfPaused()
+{
+    if (!isPaused)
+    {
+        return Promise.resolve();
+    }
+
+    return new Promise(resolve =>
+    {
+        pauseResolver = resolve;
+    });
 }
