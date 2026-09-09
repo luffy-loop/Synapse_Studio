@@ -1,153 +1,214 @@
-Synapse — Interactive Algorithm Studio
+# 🧠 Synapse — Interactive Algorithm Studio
+
+> **Understand → Visualize → Experiment → Compare**
 
 An interactive space to understand algorithms, visualize their behavior, and explore how they work.
 
-Live Demo: https://synapse-tour.netlify.app/
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Synapse-7c3aed?style=for-the-badge)](https://synapse-tour.netlify.app/)
+[![Built With](https://img.shields.io/badge/Built%20With-Vanilla%20JavaScript-f7df1e?style=for-the-badge)](https://github.com/luffy-loop/Synapse_Studio)
 
-Overview
+---
+
+## Overview
 
 Synapse is a browser-based algorithm exploration platform built to make core computer science algorithms easier to understand through interaction and visualization.
 
 Instead of only reading about an algorithm, users can experiment with it, observe how it behaves step by step, compare algorithms, and explore their time and space complexity.
 
-Features
+---
 
-Sorting Lab — visualize Bubble, Selection, Insertion, Merge, and Quick Sort.
+## Preview
 
-Searching Lab — experiment with Linear and Binary Search.
+### Dashboard
 
-Graph Search — explore graph traversal and path-search behavior visually.
+The main workspace provides access to Synapse's interactive algorithm labs and learning tools.
 
-Algorithm Comparison — compare algorithm performance on generated datasets.
+![Synapse Dashboard](docs/screenshots/dashboard.png)
 
-Algorithm Library — browse definitions, complexity, advantages, disadvantages, and applications.
+### Sorting Visualization
 
-Interactive Visualizations — observe algorithm operations through animated visual feedback.
+Experiment with sorting algorithms using custom inputs, playback controls, animation speed, and step-by-step visualization.
 
-Playback Controls — play, pause, adjust animation speed, and step through sorting visualizations.
+![Sorting Visualization](docs/screenshots/sorting_visual.png)
 
-Complexity Analysis — understand how algorithm performance changes with input size.
+### Graph Search
 
-Responsive Interface — designed for desktop and smaller screens.
+Explore graph traversal visually and observe node exploration and traversal order.
 
-Algorithm Coverage
+![Graph Visualization](docs/screenshots/graph.png)
 
-Category
+### Algorithm Comparison
 
-Algorithms
+Generate datasets and compare algorithm execution behavior, performance, and complexity.
 
-Sorting
+![Algorithm Comparison](docs/screenshots/comparison_center.png)
 
-Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, Quick Sort
+---
 
-Graph Search
+## Features
 
-BFS, DFS, Uniform Cost Search, Greedy Search, A*
+- **Sorting Lab** — Visualize Bubble, Selection, Insertion, Merge, and Quick Sort.
+- **Searching Lab** — Experiment with Linear and Binary Search.
+- **Graph Search** — Explore graph traversal and path-search behavior visually.
+- **Algorithm Comparison** — Compare algorithm performance on generated datasets.
+- **Algorithm Library** — Browse definitions, complexity, advantages, disadvantages, and applications.
+- **Interactive Visualizations** — Observe algorithm operations through animated visual feedback.
+- **Playback Controls** — Play, pause, adjust animation speed, and step through sorting visualizations.
+- **Complexity Analysis** — Understand how algorithm performance changes with input size.
+- **Responsive Interface** — Designed for desktop and smaller screens.
 
-Searching
+---
 
-Linear Search, Binary Search
+## Algorithm Coverage
 
-Tech Stack
+| Category | Algorithms |
+|---|---|
+| **Sorting** | Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, Quick Sort |
+| **Graph Search** | BFS, DFS, Uniform Cost Search, Greedy Search, A* |
+| **Searching** | Linear Search, Binary Search |
 
-HTML5 — page structure and semantic content
+---
 
-CSS3 — responsive layouts, visual system, animations, and effects
+## Tech Stack
 
-JavaScript — algorithm implementations, visualization logic, interaction, and state management
+| Technology | Purpose |
+|---|---|
+| **HTML5** | Page structure and semantic content |
+| **CSS3** | Responsive layouts, visual system, animations, and effects |
+| **JavaScript** | Algorithm implementations, visualization logic, interaction, and state management |
+| **Canvas API** | Graph visualization |
+| **Netlify** | Deployment |
 
-Canvas API — graph visualization
+No framework is required.
 
-Netlify — deployment
+Synapse is intentionally built with vanilla HTML, CSS, and JavaScript to keep the algorithm implementations visible and understandable.
 
-No framework is required. Synapse is intentionally built with vanilla HTML, CSS, and JavaScript to keep the algorithm implementations visible and understandable.
+---
 
-Project Structure
+## What This Project Demonstrates
 
+- Algorithm implementation using vanilla JavaScript
+- Step-by-step algorithm visualization
+- Interactive animation and playback controls
+- Canvas-based graph visualization
+- Client-side state and interaction management
+- Algorithm complexity analysis
+- Dataset generation and performance comparison
+- Responsive frontend development
+- Modular HTML, CSS, and JavaScript organization
+
+---
+
+## Project Structure
+
+```text
 Synapse_Studio/
-├── assets/              # Visual assets and backgrounds
-├── css/                 # Page-specific and global styles
-├── js/                  # Algorithm and interaction logic
-├── pages/               # Individual application pages
-├── index.html           # Synapse dashboard
-└── README.md            # Project documentation
+├── assets/              # Visual assets
+├── css/                 # Styles
+├── js/                  # Algorithms and application logic
+├── pages/               # Application pages
+├── docs/
+│   └── screenshots/     # README screenshots
+├── index.html           # Dashboard
+└── README.md            # Documentation
+```
 
-Application Sections
+---
 
-Dashboard
+## Application Sections
+
+### Dashboard
 
 The main entry point to Synapse, introducing the platform and its interactive algorithm labs.
 
-Sorting
+### Sorting
 
 Visualize sorting algorithms and observe how elements are compared, swapped, and rearranged.
 
-Search
+### Search
 
 Explore graph-based search concepts with an interactive graph visualization.
 
-Searching
+### Searching
 
 Experiment with Linear Search and Binary Search using animated array visualizations.
 
-Compare
+### Compare
 
 Run algorithm comparisons against generated datasets and inspect execution results and complexity information.
 
-Library
+### Library
 
 Use the built-in reference library to explore algorithm definitions, complexity, applications, advantages, and limitations.
 
-About
+### About
 
 Learn about the motivation, scope, and implementation of Synapse.
 
-Running Locally
+---
+
+## Running Locally
 
 Synapse is a static web application, so no package manager or build step is required.
 
-Clone the repository.
+### 1. Clone the repository
 
-Open the project folder.
+```bash
+git clone https://github.com/luffy-loop/Synapse_Studio.git
+```
 
-Open index.html in a browser.
+### 2. Open the project
 
-For the best development experience, use a local development server such as VS Code Live Server.
+```bash
+cd Synapse_Studio
+```
 
-Why Synapse?
+### 3. Run the application
 
-Algorithmic concepts are often taught through static diagrams, pseudocode, and theoretical complexity tables. Synapse takes a more interactive approach:
+Open `index.html` directly in a browser.
 
-Understand → Visualize → Experiment → Compare
+For the best development experience, use a local development server such as **VS Code Live Server**.
+
+---
+
+## Why Synapse?
+
+Algorithmic concepts are often taught through static diagrams, pseudocode, and theoretical complexity tables.
+
+Synapse takes a more interactive approach:
+
+> **Understand → Visualize → Experiment → Compare**
 
 The goal is to make algorithm behavior easier to observe rather than treating algorithms as code that only runs in the background.
 
-Project Context
+---
 
-Synapse was developed as an academic project for Computational Foundations of Artificial Intelligence (CFAI), with a focus on making algorithmic concepts more interactive and approachable.
+## Project Context
 
-Future Improvements
+Synapse was developed as an academic project for **Computational Foundations of Artificial Intelligence (CFAI)**, with a focus on making algorithmic concepts more interactive and approachable.
+
+---
+
+## Future Improvements
 
 Planned improvements include:
 
-richer algorithm playback and step controls
+- Richer algorithm playback and step controls
+- Additional visualization modes
+- Improved mobile interactions
+- Deeper performance analytics
+- Expanded algorithm coverage
+- Accessibility improvements
+- Automated testing
 
-additional visualization modes
+---
 
-improved mobile interactions
+## Author
 
-deeper performance analytics
-
-expanded algorithm coverage
-
-accessibility improvements
-
-automated testing
-
-Author
-
-Kandhula Poojasri Reddy
+**Kandhula Poojasri Reddy**
 
 Computer Science Student · Developer · ML Explorer
+
+---
 
 ⭐ If you find Synapse useful for learning algorithms, consider giving the repository a star.
