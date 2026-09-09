@@ -29,8 +29,11 @@ Instead of only reading about an algorithm, users can experiment with it, observ
 - 📚 Built-in algorithm reference library
 - 📱 Responsive interface
 - 🚀 Deployed with Netlify
-  --------------
 ## ?? Screenshots
+
+## ?? Demo
+
+![Synapse Demo](docs/screenshots/synapse-demo.gif)
 
 ### Dashboard
 
