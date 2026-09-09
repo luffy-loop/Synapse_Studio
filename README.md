@@ -16,7 +16,19 @@ Synapse is a browser-based algorithm exploration platform built to make core com
 Instead of only reading about an algorithm, users can experiment with it, observe how it behaves step by step, compare algorithms, and explore their time and space complexity.
 
 ---
+## ✨ Highlights
 
+- 🎨 Modern dark UI designed for algorithm exploration
+- 📊 Interactive sorting visualizations
+- 🔎 Linear and Binary Search exploration
+- 🕸️ Canvas-based graph visualization
+- ⚡ BFS, DFS, Uniform Cost Search, Greedy Search, and A*
+- 📈 Algorithm performance comparison
+- 🎮 Play, pause, and step-based visualization controls
+- 📚 Built-in algorithm reference library
+- 📱 Responsive interface
+- 🚀 Deployed with Netlify
+  --------------
 ## Preview
 
 ### Dashboard
