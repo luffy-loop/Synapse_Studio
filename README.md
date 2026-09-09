@@ -41,8 +41,7 @@ Explore graph traversal visually and observe node exploration and traversal orde
 
 Generate datasets and compare algorithm execution behavior, performance, and complexity.
 
-![Algorithm Comparison](docs/screenshots/comparison_center.png)
-
+![Algorithm Comparison](docs/screenshots/comparision_center.png)
 ---
 
 ## Features
