@@ -33,7 +33,7 @@ Instead of only reading about an algorithm, users can experiment with it, observ
 
 ## ?? Demo
 
-![Synapse Demo](docs/screenshots/synapse-demo.gif)
+![Synapse Demo](docs/screenshots/demo-synapse.gif)
 
 ### Dashboard
 
