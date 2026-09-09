@@ -506,10 +506,9 @@
    SYNAPSE OPENING EXPERIENCE
    ========================================= */
 
-body:has(.intro-screen) {
+body:has(.intro-screen:not(.intro-exit)) {
     overflow: hidden;
 }
-
 .intro-screen {
     position: fixed;
     inset: 0;
