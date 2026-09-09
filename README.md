@@ -6,6 +6,7 @@ An interactive space to understand algorithms, visualize their behavior, and exp
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Synapse-7c3aed?style=for-the-badge)](https://synapse-tour.netlify.app/)
 [![Built With](https://img.shields.io/badge/Built%20With-Vanilla%20JavaScript-f7df1e?style=for-the-badge)](https://github.com/luffy-loop/Synapse_Studio)
+[![Validate Synapse](https://github.com/luffy-loop/Synapse_Studio/actions/workflows/validate.yml/badge.svg)](https://github.com/luffy-loop/Synapse_Studio/actions/workflows/validate.yml)
 
 ---
 
@@ -29,13 +30,19 @@ Instead of only reading about an algorithm, users can experiment with it, observ
 - 📱 Responsive interface
 - 🚀 Deployed with Netlify
   --------------
-## Preview
+## ?? Screenshots
 
 ### Dashboard
 
 The main workspace provides access to Synapse's interactive algorithm labs and learning tools.
 
 ![Synapse Dashboard](docs/screenshots/dashboard.png)
+
+### Sorting Lab
+
+The sorting section provides access to interactive sorting algorithms and visualization controls.
+
+![Sorting Homepage](docs/screenshots/sorting_homepage.png)
 
 ### Sorting Visualization
 
@@ -223,3 +230,4 @@ Computer Science Student · Developer · ML Explorer
 ---
 
 ⭐ If you find Synapse useful for learning algorithms, consider giving the repository a star.
+
