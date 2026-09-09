@@ -9,7 +9,50 @@
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
+<!-- Opening Experience -->
+<section class="intro-screen" id="introScreen">
+    <div class="intro-glow"></div>
 
+    <div class="intro-content">
+        <div class="intro-eyebrow">COMPUTATIONAL EXPLORATION</div>
+
+        <h1>
+            Welcome to
+            <span>Synapse.</span>
+        </h1>
+
+        <p>
+            An interactive space to understand algorithms,
+            visualize their behavior, and explore how they work.
+        </p>
+        <div class="intro-status">
+    <span class="status-dot"></span>
+    <span>EXPERIENCE READY</span>
+</div>
+        <button class="enter-button" onclick="enterSynapse()">
+            <span>Enter Synapse</span>
+            <span class="enter-arrow">→</span>
+        </button>
+    </div>
+
+    <div class="intro-footer">
+        <span>ALGORITHM STUDIO</span>
+        <span>01 / 01</span>
+    </div>
+</section>
+
+<script>
+    function enterSynapse() {
+        const intro = document.getElementById("introScreen");
+
+        intro.classList.add("intro-exit");
+        document.body.classList.remove("intro-active");
+
+        setTimeout(() => {
+            intro.style.display = "none";
+        }, 800);
+    }
+</script>
 <div class="app-container">
 
     <aside class="sidebar">
