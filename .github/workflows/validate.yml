@@ -1,0 +1,68 @@
+name: Validate Synapse
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate project structure
+        run: |
+          test -f index.html
+          test -d assets
+          test -d css
+          test -d js
+          test -d pages
+          test -d docs
+          test -f README.md
+          test -f LICENSE
+          test -f .gitignore
+
+      - name: Check for debug statements
+        run: |
+          if grep -RniE 'console\.log|debugger' --include='*.js' js/; then
+            echo "Debug statements found."
+            exit 1
+          fi
+
+      - name: Check HTML files
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          errors = []
+
+          for path in Path(".").rglob("*.html"):
+              text = path.read_text(encoding="utf-8")
+
+              if "<html" not in text.lower():
+                  errors.append(f"{path}: missing <html> element")
+
+              if "<head" not in text.lower():
+                  errors.append(f"{path}: missing <head> element")
+
+              if "<body" not in text.lower():
+                  errors.append(f"{path}: missing <body> element")
+
+              ids = re.findall(r'id=["\']([^"\']+)["\']', text)
+              duplicates = {x for x in ids if ids.count(x) > 1}
+
+              for duplicate in sorted(duplicates):
+                  errors.append(f"{path}: duplicate id '{duplicate}'")
+
+          if errors:
+              print("\n".join(errors))
+              sys.exit(1)
+
+          print("HTML validation checks passed.")
+          PY
