@@ -197,16 +197,28 @@ function buildGraph(edges) {
 
     edges.forEach(edge => {
 
-        let [a,b] = edge.split("-");
+        let [a, b, cost] = edge.split("-");
 
-        if(!graph[a])
+        a = a.trim().toUpperCase();
+        b = b.trim().toUpperCase();
+
+        cost = Number(cost) || 1;
+
+        if (!graph[a])
             graph[a] = [];
 
-        if(!graph[b])
+        if (!graph[b])
             graph[b] = [];
 
-        graph[a].push(b);
-        graph[b].push(a);
+        graph[a].push({
+            node: b,
+            cost: cost
+        });
+
+        graph[b].push({
+            node: a,
+            cost: cost
+        });
 
     });
 
@@ -231,10 +243,12 @@ function bfs(graph,start) {
 
         for(let neighbor of graph[node] || []) {
 
-            if(!visited.has(neighbor)) {
+            const nextNode = neighbor.node;
 
-                visited.add(neighbor);
-                queue.push(neighbor);
+            if(!visited.has(nextNode)) {
+
+                visited.add(nextNode);
+                queue.push(nextNode);
 
             }
 
@@ -269,7 +283,7 @@ function dfs(graph,start) {
             for(let i = neighbors.length - 1; i >= 0; i--) {
 
                 stack.push(
-                    neighbors[i]
+                    neighbors[i].node
                 );
 
             }
@@ -323,15 +337,17 @@ function findPath(graph, start, goal, algorithm) {
 
         for (const neighbor of orderedNeighbors) {
 
-            if (!visited.has(neighbor)) {
+            const nextNode = neighbor.node;
 
-                visited.add(neighbor);
-                parent[neighbor] = node;
+            if (!visited.has(nextNode)) {
+
+                visited.add(nextNode);
+                parent[nextNode] = node;
 
                 if (algorithm === "BFS") {
-                    queue.push(neighbor);
+                    queue.push(nextNode);
                 } else {
-                    stack.push(neighbor);
+                    stack.push(nextNode);
                 }
 
             }
@@ -359,8 +375,123 @@ function findPath(graph, start, goal, algorithm) {
 
     }
 
-    return path[0] === start ? path : [];
+    return path;
 }
+function ucs(graph, start, goal) {
+
+    if (!start || !graph[start]) {
+        return {
+            traversal: [],
+            path: [],
+            cost: 0
+        };
+    }
+
+    if (!goal || !graph[goal]) {
+        return {
+            traversal: [],
+            path: [],
+            cost: 0
+        };
+    }
+
+    const frontier = [
+        {
+            node: start,
+            cost: 0
+        }
+    ];
+
+    const visited = new Set();
+    const parent = {};
+    const distances = {};
+
+    distances[start] = 0;
+
+    const traversal = [];
+
+    while (frontier.length) {
+
+        frontier.sort(
+            (a, b) => a.cost - b.cost
+        );
+
+        const current =
+            frontier.shift();
+
+        const node = current.node;
+        const cost = current.cost;
+
+        if (visited.has(node)) {
+            continue;
+        }
+
+        if (cost !== distances[node]) {
+            continue;
+        }
+
+        visited.add(node);
+        traversal.push(node);
+
+        if (node === goal) {
+            break;
+        }
+
+        for (const neighbor of graph[node] || []) {
+
+            const nextNode = neighbor.node;
+            const newCost =
+                cost + neighbor.cost;
+
+            if (
+                distances[nextNode] === undefined ||
+                newCost < distances[nextNode]
+            ) {
+
+                distances[nextNode] = newCost;
+                parent[nextNode] = node;
+
+                frontier.push({
+                    node: nextNode,
+                    cost: newCost
+                });
+
+            }
+
+        }
+
+    }
+
+    if (!visited.has(goal)) {
+        return {
+            traversal: traversal,
+            path: [],
+            cost: 0
+        };
+    }
+
+    const path = [];
+    let current = goal;
+
+    while (current !== undefined) {
+
+        path.unshift(current);
+
+        if (current === start) {
+            break;
+        }
+
+        current = parent[current];
+
+    }
+
+    return {
+        traversal: traversal,
+        path: path,
+        cost: distances[goal]
+    };
+}
+
 
 function runSearch() {
 
@@ -403,39 +534,69 @@ function runSearch() {
         performance.now();
 
     let traversal = [];
+    let path = [];
+    let pathCost = 0;
 
     switch(algorithm) {
 
         case "BFS":
             traversal =
                 bfs(graph,startNode);
+
+            path =
+                findPath(
+                    graph,
+                    startNode,
+                    goalNode,
+                    algorithm
+                );
+
+            pathCost =
+                path.length
+                    ? path.length - 1
+                    : 0;
             break;
 
         case "DFS":
             traversal =
                 dfs(graph,startNode);
+
+            path =
+                findPath(
+                    graph,
+                    startNode,
+                    goalNode,
+                    algorithm
+                );
+
+            pathCost =
+                path.length
+                    ? path.length - 1
+                    : 0;
             break;
 
-        case "UCS":
+        case "UCS": {
+
+            const result =
+                ucs(
+                    graph,
+                    startNode,
+                    goalNode
+                );
+
+            traversal = result.traversal;
+            path = result.path;
+            pathCost = result.cost;
+
+            break;
+        }
+
         case "Greedy Search":
         case "A*":
             traversal =
                 bfs(graph,startNode);
             break;
     }
-
-    const path =
-        (
-            algorithm === "BFS" ||
-            algorithm === "DFS"
-        )
-            ? findPath(
-                graph,
-                startNode,
-                goalNode,
-                algorithm
-            )
-            : [];
 
     const endTime =
         performance.now();
@@ -463,7 +624,7 @@ function runSearch() {
         "pathCost"
     ).innerText =
         path.length
-            ? path.length - 1
+            ? pathCost
             : 0;
 
     document.getElementById(
@@ -556,15 +717,17 @@ function drawGraph(graph, traversal = []) {
 
         graph[node].forEach(neighbor => {
 
+            const nextNode = neighbor.node;
+
             const edgeKey =
-                [node, neighbor].sort().join("-");
+                [node, nextNode].sort().join("-");
 
             if (drawnEdges.has(edgeKey)) return;
 
             drawnEdges.add(edgeKey);
 
             const start = positions[node];
-            const end = positions[neighbor];
+            const end = positions[nextNode];
 
             if (!start || !end) return;
 
