@@ -51,15 +51,28 @@
 
                 <label>Algorithm</label>
 
-                <select id="algorithm">
+                <select id="algorithm" class="algorithm-native-select" aria-hidden="true" tabindex="-1">
+        <option>BFS</option>
+        <option>DFS</option>
+        <option>UCS</option>
+        <option>Greedy Search</option>
+        <option>A*</option>
+    </select>
 
-                    <option>BFS</option>
-                    <option>DFS</option>
-                    <option>UCS</option>
-                    <option>Greedy Search</option>
-                    <option>A*</option>
+    <div class="custom-algorithm-dropdown" id="customAlgorithmDropdown">
+        <button type="button" class="algorithm-dropdown-button" id="algorithmDropdownButton">
+            <span id="algorithmDropdownValue">BFS</span>
+            <span class="dropdown-arrow">⌄</span>
+        </button>
 
-                </select>
+        <div class="algorithm-dropdown-menu" id="algorithmDropdownMenu">
+            <button type="button" data-value="BFS">BFS</button>
+            <button type="button" data-value="DFS">DFS</button>
+            <button type="button" data-value="UCS">UCS</button>
+            <button type="button" data-value="Greedy Search">Greedy Search</button>
+            <button type="button" data-value="A*">A*</button>
+        </div>
+    </div>
 
             </div>
 
@@ -124,6 +137,20 @@
                     placeholder="E">
 
             </div>
+
+        </section>
+
+        <section
+            id="heuristicSection"
+            class="graph-input"
+            style="display: none;"
+        >
+
+            <h2>Heuristic Values</h2>
+
+            <textarea
+                id="heuristicInput"
+                placeholder="A: 5&#10;B: 4&#10;C: 2&#10;D: 1&#10;F: 0"></textarea>
 
         </section>
 

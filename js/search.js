@@ -52,6 +52,96 @@ const explanations = {
 
 };
 
+
+function setupAlgorithmDropdown() {
+
+    const nativeSelect =
+        document.getElementById("algorithm");
+
+    const dropdown =
+        document.getElementById("customAlgorithmDropdown");
+
+    const button =
+        document.getElementById("algorithmDropdownButton");
+
+    const menu =
+        document.getElementById("algorithmDropdownMenu");
+
+    const value =
+        document.getElementById("algorithmDropdownValue");
+
+    if (
+        !nativeSelect ||
+        !dropdown ||
+        !button ||
+        !menu ||
+        !value
+    ) {
+        return;
+    }
+
+    button.addEventListener("click", () => {
+
+        const isOpen =
+            menu.classList.toggle("open");
+
+        button.classList.toggle(
+            "active",
+            isOpen
+        );
+
+    });
+
+    menu.querySelectorAll("button").forEach(option => {
+
+        option.addEventListener("click", () => {
+
+            const selected =
+                option.dataset.value;
+
+            nativeSelect.value = selected;
+            value.innerText = selected;
+
+            menu
+                .querySelectorAll("button")
+                .forEach(item =>
+                    item.classList.remove("selected")
+                );
+
+            option.classList.add("selected");
+
+            menu.classList.remove("open");
+            button.classList.remove("active");
+
+            updateExplanation();
+
+        });
+
+    });
+
+    const initial =
+        menu.querySelector(
+            `[data-value="${nativeSelect.value}"]`
+        );
+
+    if (initial) {
+        initial.classList.add("selected");
+    }
+
+    document.addEventListener("click", event => {
+
+        if (!dropdown.contains(event.target)) {
+
+            menu.classList.remove("open");
+            button.classList.remove("active");
+
+        }
+
+    });
+
+}
+
+
 function updateExplanation() {
 
     const algo =
@@ -59,6 +149,21 @@ function updateExplanation() {
 
     const data =
         explanations[algo];
+
+    const heuristicSection =
+        document.getElementById("heuristicSection");
+
+    if (heuristicSection) {
+
+        heuristicSection.style.display =
+            (
+                algo === "Greedy Search" ||
+                algo === "A*"
+            )
+                ? "block"
+                : "none";
+
+    }
 
     document.getElementById(
         "algorithmExplanation"
@@ -493,6 +598,263 @@ function ucs(graph, start, goal) {
 }
 
 
+
+function parseHeuristics() {
+
+    const input =
+        document.getElementById("heuristicInput");
+
+    const heuristics = {};
+
+    if (!input) {
+        return heuristics;
+    }
+
+    input.value
+        .split("\n")
+        .forEach(line => {
+
+            const parts = line.split(":");
+
+            if (parts.length !== 2) {
+                return;
+            }
+
+            const node =
+                parts[0].trim().toUpperCase();
+
+            const value =
+                Number(parts[1].trim());
+
+            if (node && !Number.isNaN(value)) {
+                heuristics[node] = value;
+            }
+
+        });
+
+    return heuristics;
+}
+
+
+function greedySearch(graph, start, goal, heuristics) {
+
+    if (!start || !graph[start]) {
+        return {
+            traversal: [],
+            path: [],
+            cost: 0
+        };
+    }
+
+    if (!goal || !graph[goal]) {
+        return {
+            traversal: [],
+            path: [],
+            cost: 0
+        };
+    }
+
+    const frontier = [
+        { node: start }
+    ];
+
+    const visited = new Set();
+    const parent = {};
+    const distances = {};
+
+    distances[start] = 0;
+
+    const traversal = [];
+
+    while (frontier.length) {
+
+        frontier.sort(
+            (a, b) =>
+                (heuristics[a.node] ?? Infinity) -
+                (heuristics[b.node] ?? Infinity)
+        );
+
+        const current =
+            frontier.shift();
+
+        const node =
+            current.node;
+
+        if (visited.has(node)) {
+            continue;
+        }
+
+        visited.add(node);
+        traversal.push(node);
+
+        if (node === goal) {
+            break;
+        }
+
+        for (const neighbor of graph[node] || []) {
+
+            const nextNode =
+                neighbor.node;
+
+            if (!visited.has(nextNode)) {
+
+                if (distances[nextNode] === undefined) {
+                    distances[nextNode] =
+                        distances[node] + neighbor.cost;
+                    parent[nextNode] = node;
+                }
+
+                frontier.push({
+                    node: nextNode
+                });
+
+            }
+
+        }
+
+    }
+
+    if (!visited.has(goal)) {
+        return {
+            traversal: traversal,
+            path: [],
+            cost: 0
+        };
+    }
+
+    const path = [];
+    let current = goal;
+
+    while (current !== undefined) {
+
+        path.unshift(current);
+
+        if (current === start) {
+            break;
+        }
+
+        current = parent[current];
+    }
+
+    return {
+        traversal: traversal,
+        path: path,
+        cost: distances[goal]
+    };
+}
+
+
+
+function aStarSearch(graph, start, goal, heuristics) {
+
+    if (!start || !graph[start]) {
+        return { traversal: [], path: [], cost: 0 };
+    }
+
+    if (!goal || !graph[goal]) {
+        return { traversal: [], path: [], cost: 0 };
+    }
+
+    const frontier = [
+        {
+            node: start,
+            cost: 0,
+            priority: heuristics[start] ?? Infinity
+        }
+    ];
+
+    const visited = new Set();
+    const parent = {};
+    const distances = {};
+
+    distances[start] = 0;
+
+    const traversal = [];
+
+    while (frontier.length) {
+
+        frontier.sort(
+            (a, b) => a.priority - b.priority
+        );
+
+        const current = frontier.shift();
+
+        const node = current.node;
+        const cost = current.cost;
+
+        if (visited.has(node)) {
+            continue;
+        }
+
+        if (cost !== distances[node]) {
+            continue;
+        }
+
+        visited.add(node);
+        traversal.push(node);
+
+        if (node === goal) {
+            break;
+        }
+
+        for (const neighbor of graph[node] || []) {
+
+            const nextNode = neighbor.node;
+            const newCost = cost + neighbor.cost;
+
+            if (
+                distances[nextNode] === undefined ||
+                newCost < distances[nextNode]
+            ) {
+
+                distances[nextNode] = newCost;
+                parent[nextNode] = node;
+
+                const heuristic =
+                    heuristics[nextNode] ?? Infinity;
+
+                frontier.push({
+                    node: nextNode,
+                    cost: newCost,
+                    priority: newCost + heuristic
+                });
+
+            }
+
+        }
+
+    }
+
+    if (!visited.has(goal)) {
+        return {
+            traversal: traversal,
+            path: [],
+            cost: 0
+        };
+    }
+
+    const path = [];
+    let current = goal;
+
+    while (current !== undefined) {
+
+        path.unshift(current);
+
+        if (current === start) {
+            break;
+        }
+
+        current = parent[current];
+    }
+
+    return {
+        traversal: traversal,
+        path: path,
+        cost: distances[goal]
+    };
+}
+
+
 function runSearch() {
 
     const graphText =
@@ -591,11 +953,45 @@ function runSearch() {
             break;
         }
 
-        case "Greedy Search":
-        case "A*":
-            traversal =
-                bfs(graph,startNode);
+        case "Greedy Search": {
+
+            const heuristics =
+                parseHeuristics();
+
+            const result =
+                greedySearch(
+                    graph,
+                    startNode,
+                    goalNode,
+                    heuristics
+                );
+
+            traversal = result.traversal;
+            path = result.path;
+            pathCost = result.cost;
+
             break;
+        }
+
+        case "A*": {
+
+            const heuristics =
+                parseHeuristics();
+
+            const result =
+                aStarSearch(
+                    graph,
+                    startNode,
+                    goalNode,
+                    heuristics
+                );
+
+            traversal = result.traversal;
+            path = result.path;
+            pathCost = result.cost;
+
+            break;
+        }
     }
 
     const endTime =
@@ -654,7 +1050,10 @@ document
     updateExplanation
 );
 
-window.onload = updateExplanation;
+window.onload = () => {
+    updateExplanation();
+    setupAlgorithmDropdown();
+};
 
 // =========================================================
 // GRAPH VISUALIZATION

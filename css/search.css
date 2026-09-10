@@ -609,3 +609,131 @@
     }
 
 }
+
+/* Algorithm dropdown */
+#algorithm {
+    background: #12141d;
+    color: #f5f7ff;
+    border: 1px solid #6c4cff;
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: 0.25s ease;
+}
+
+#algorithm:hover {
+    border-color: #8b6cff;
+}
+
+#algorithm:focus {
+    border-color: #9d84ff;
+    box-shadow: 0 0 0 3px rgba(108, 76, 255, 0.18);
+}
+
+/* Dropdown options */
+#algorithm option {
+    background: #12141d;
+    color: #f5f7ff;
+    padding: 12px;
+}
+
+/* Custom Algorithm Dropdown */
+
+.algorithm-native-select {
+    display: none;
+}
+
+.custom-algorithm-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.algorithm-dropdown-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #12141d;
+    color: #f5f7ff;
+    border: 1px solid #6c4cff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.algorithm-dropdown-button:hover {
+    border-color: #9d84ff;
+}
+
+.algorithm-dropdown-button.active {
+    border-color: #9d84ff;
+    box-shadow: 0 0 0 3px rgba(108, 76, 255, 0.18);
+}
+
+.dropdown-arrow {
+    font-size: 22px;
+    line-height: 1;
+    transition: transform 0.25s ease;
+}
+
+.algorithm-dropdown-button.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.algorithm-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    background: #12141d;
+    border: 1px solid rgba(108, 76, 255, 0.55);
+    border-radius: 14px;
+    padding: 6px;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: 0.2s ease;
+}
+
+.algorithm-dropdown-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.algorithm-dropdown-menu button {
+    width: 100%;
+    display: block;
+    background: transparent;
+    color: #b9c0d0;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 14px;
+    text-align: left;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.algorithm-dropdown-menu button:hover {
+    background: rgba(108, 76, 255, 0.16);
+    color: #ffffff;
+}
+
+.algorithm-dropdown-menu button.selected {
+    background: rgba(108, 76, 255, 0.24);
+    color: #ffffff;
+}
+
+/* Keep the algorithm dropdown above following sections */
+.controls-grid { position: relative; z-index: 20; overflow: visible; }
+.controls-grid .glass-card:first-child { position: relative; z-index: 30; overflow: visible; }
