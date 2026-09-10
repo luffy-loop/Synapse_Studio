@@ -281,6 +281,87 @@ function dfs(graph,start) {
     return order;
 }
 
+function findPath(graph, start, goal, algorithm) {
+
+    if (!start || !graph[start]) {
+        return [];
+    }
+
+    if (!goal || !graph[goal]) {
+        return [];
+    }
+
+    const queue = [start];
+    const stack = [start];
+    const visited = new Set();
+    const parent = {};
+
+    visited.add(start);
+
+    while (
+        algorithm === "BFS"
+            ? queue.length
+            : stack.length
+    ) {
+
+        const node =
+            algorithm === "BFS"
+                ? queue.shift()
+                : stack.pop();
+
+        if (node === goal) {
+            break;
+        }
+
+        const neighbors =
+            graph[node] || [];
+
+        const orderedNeighbors =
+            algorithm === "BFS"
+                ? neighbors
+                : [...neighbors].reverse();
+
+        for (const neighbor of orderedNeighbors) {
+
+            if (!visited.has(neighbor)) {
+
+                visited.add(neighbor);
+                parent[neighbor] = node;
+
+                if (algorithm === "BFS") {
+                    queue.push(neighbor);
+                } else {
+                    stack.push(neighbor);
+                }
+
+            }
+
+        }
+
+    }
+
+    if (!visited.has(goal)) {
+        return [];
+    }
+
+    const path = [];
+    let current = goal;
+
+    while (current !== undefined) {
+
+        path.unshift(current);
+
+        if (current === start) {
+            break;
+        }
+
+        current = parent[current];
+
+    }
+
+    return path[0] === start ? path : [];
+}
+
 function runSearch() {
 
     const graphText =
@@ -306,7 +387,12 @@ function runSearch() {
     const startNode =
         document.getElementById(
             "startNode"
-        ).value.trim();
+        ).value.trim().toUpperCase();
+
+    const goalNode =
+        document.getElementById(
+            "goalNode"
+        ).value.trim().toUpperCase();
 
     const algorithm =
         document.getElementById(
@@ -338,6 +424,19 @@ function runSearch() {
             break;
     }
 
+    const path =
+        (
+            algorithm === "BFS" ||
+            algorithm === "DFS"
+        )
+            ? findPath(
+                graph,
+                startNode,
+                goalNode,
+                algorithm
+            )
+            : [];
+
     const endTime =
         performance.now();
 
@@ -345,7 +444,16 @@ function runSearch() {
         "traversalOutput"
     ).innerText =
         traversal.join(" → ");
+
+    document.getElementById(
+        "pathOutput"
+    ).innerText =
+        path.length
+            ? path.join(" → ")
+            : "No path found";
+
     drawGraph(graph, traversal);
+
     document.getElementById(
         "visitedCount"
     ).innerText =
@@ -354,7 +462,9 @@ function runSearch() {
     document.getElementById(
         "pathCost"
     ).innerText =
-        traversal.length - 1;
+        path.length
+            ? path.length - 1
+            : 0;
 
     document.getElementById(
         "executionTime"
@@ -369,6 +479,8 @@ function runSearch() {
     <strong>Total Nodes Visited:</strong> ${traversal.length}
     <br><br>
     <strong>Start Node:</strong> ${startNode}
+    <br><br>
+    <strong>Goal Node:</strong> ${goalNode}
     <br><br>
     <strong>Algorithm:</strong> ${algorithm}
     `;
