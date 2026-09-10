@@ -1039,9 +1039,6 @@ if (speedControl) {
 // =========================================
 // PLAYBACK CONTROLS
 // =========================================
-// =========================================
-// PLAYBACK CONTROLS
-// =========================================
 
 function pauseSorting()
 {
@@ -1110,105 +1107,6 @@ function stepSorting()
 
     document.getElementById("operation").innerText =
         "Advancing one step...";
-}
-
-
-// =========================================
-// PLAYBACK CONTROLS
-// =========================================
-
-function pauseSorting()
-{
-    isPaused = true;
-    stepMode = false;
-
-    document.getElementById("statusText").innerText =
-        "Paused";
-
-    document.getElementById("operation").innerText =
-        "Visualization Paused";
-}
-
-
-function resumeSorting()
-{
-    isPaused = false;
-    stepMode = false;
-
-    if (pauseResolver)
-    {
-        pauseResolver();
-        pauseResolver = null;
-    }
-
-    if (stepResolver)
-    {
-        stepResolver();
-        stepResolver = null;
-    }
-
-    document.getElementById("statusText").innerText =
-        "Running";
-
-    document.getElementById("operation").innerText =
-        "Resuming visualization...";
-}
-
-
-function stepSorting()
-{
-    isPaused = false;
-    stepMode = true;
-
-    if (pauseResolver)
-    {
-        pauseResolver();
-        pauseResolver = null;
-    }
-
-    if (stepResolver)
-    {
-        stepResolver();
-        stepResolver = null;
-    }
-
-    document.getElementById("statusText").innerText =
-        "Step Mode";
-
-    document.getElementById("operation").innerText =
-        "Advancing one step...";
-}
-
-
-function waitIfPaused()
-{
-    if (!isPaused)
-    {
-        return Promise.resolve();
-    }
-
-    return new Promise(resolve =>
-    {
-        pauseResolver = resolve;
-    });
-}
-
-
-function resumeSorting()
-{
-    isPaused = false;
-
-    if (pauseResolver)
-    {
-        pauseResolver();
-        pauseResolver = null;
-    }
-
-    document.getElementById("statusText").innerText =
-        "Running";
-
-    document.getElementById("operation").innerText =
-        "Resuming visualization...";
 }
 
 
