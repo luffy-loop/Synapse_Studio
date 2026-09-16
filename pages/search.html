@@ -14,7 +14,7 @@
 
 <div class="app-container">
 
-    <aside class="sidebar">
+    <aside class="sidebar" aria-label="Main navigation">
 
         <div class="logo">
             <h1>Synapse</h1>
@@ -24,10 +24,11 @@
         <nav>
             <a href="../index.html">Dashboard</a>
             <a href="sorting.html">Sorting</a>
-            <a href="search.html" class="active">Search</a>
+            <a href="search.html" class="active" aria-current="page">Search</a>
             <a href="searching.html">Searching</a>
             <a href="compare.html">Compare</a>
             <a href="library.html">Library</a>
+            <a href="graph-lab.html">Graph Lab</a>
             <a href="about.html">About</a>
         </nav>
 
@@ -49,52 +50,52 @@
 
             <div class="glass-card">
 
-                <label>Algorithm</label>
+                <label for="algorithmDropdownButton">Algorithm</label>
 
                 <select id="algorithm" class="algorithm-native-select" aria-hidden="true" tabindex="-1">
-        <option>BFS</option>
-        <option>DFS</option>
-        <option>UCS</option>
-        <option>Greedy Search</option>
-        <option>A*</option>
-    </select>
+                    <option>BFS</option>
+                    <option>DFS</option>
+                    <option>UCS</option>
+                    <option>Greedy Search</option>
+                    <option>A*</option>
+                </select>
 
-    <div class="custom-algorithm-dropdown" id="customAlgorithmDropdown">
-        <button type="button" class="algorithm-dropdown-button" id="algorithmDropdownButton">
-            <span id="algorithmDropdownValue">BFS</span>
-            <span class="dropdown-arrow">⌄</span>
-        </button>
+                <div class="custom-algorithm-dropdown" id="customAlgorithmDropdown">
+                    <button type="button" class="algorithm-dropdown-button" id="algorithmDropdownButton" aria-haspopup="listbox" aria-expanded="false" aria-label="Select search algorithm">
+                        <span id="algorithmDropdownValue">BFS</span>
+                        <span class="dropdown-arrow" aria-hidden="true">⌄</span>
+                    </button>
 
-        <div class="algorithm-dropdown-menu" id="algorithmDropdownMenu">
-            <button type="button" data-value="BFS">BFS</button>
-            <button type="button" data-value="DFS">DFS</button>
-            <button type="button" data-value="UCS">UCS</button>
-            <button type="button" data-value="Greedy Search">Greedy Search</button>
-            <button type="button" data-value="A*">A*</button>
-        </div>
-    </div>
+                    <div class="algorithm-dropdown-menu" id="algorithmDropdownMenu" role="listbox" aria-label="Search algorithms">
+                        <button type="button" data-value="BFS" role="option">BFS</button>
+                        <button type="button" data-value="DFS" role="option">DFS</button>
+                        <button type="button" data-value="UCS" role="option">UCS</button>
+                        <button type="button" data-value="Greedy Search" role="option">Greedy Search</button>
+                        <button type="button" data-value="A*" role="option">A*</button>
+                    </div>
+                </div>
 
             </div>
 
             <div class="glass-card">
 
-                <label>Graph Presets</label>
+                <span class="control-label">Graph Presets</span>
 
                 <div class="preset-buttons">
 
-                    <button onclick="loadTreeGraph()">
+                    <button type="button" onclick="loadTreeGraph()">
                         Tree Graph
                     </button>
 
-                    <button onclick="loadBinaryGraph()">
+                    <button type="button" onclick="loadBinaryGraph()">
                         Binary Tree
                     </button>
 
-                    <button onclick="loadCycleGraph()">
+                    <button type="button" onclick="loadCycleGraph()">
                         Cycle Graph
                     </button>
 
-                    <button onclick="generateRandomGraph()">
+                    <button type="button" onclick="generateRandomGraph()">
                         Random Graph
                     </button>
 
@@ -108,9 +109,7 @@
 
             <h2>Graph Input</h2>
 
-            <textarea
-                id="graphInput"
-                placeholder="A-B&#10;A-C&#10;B-D&#10;C-E"></textarea>
+            <textarea id="graphInput" aria-label="Graph input" placeholder="A-B&#10;A-C&#10;B-D&#10;C-E"></textarea>
 
         </section>
 
@@ -118,129 +117,84 @@
 
             <div class="glass-card">
 
-                <label>Start Node</label>
+                <label for="startNode">Start Node</label>
 
-                <input
-                    type="text"
-                    id="startNode"
-                    placeholder="A">
+                <input type="text" id="startNode" placeholder="A">
 
             </div>
 
             <div class="glass-card">
 
-                <label>Goal Node</label>
+                <label for="goalNode">Goal Node</label>
 
-                <input
-                    type="text"
-                    id="goalNode"
-                    placeholder="E">
+                <input type="text" id="goalNode" placeholder="E">
 
             </div>
 
         </section>
 
-        <section
-            id="heuristicSection"
-            class="graph-input"
-            style="display: none;"
-        >
+        <section id="heuristicSection" class="graph-input" style="display: none;">
 
             <h2>Heuristic Values</h2>
 
-            <textarea
-                id="heuristicInput"
-                placeholder="A: 5&#10;B: 4&#10;C: 2&#10;D: 1&#10;F: 0"></textarea>
+            <textarea id="heuristicInput" aria-label="Heuristic values" placeholder="A: 5&#10;B: 4&#10;C: 2&#10;D: 1&#10;F: 0"></textarea>
 
         </section>
 
         <section class="action-buttons">
 
-            <button onclick="runSearch()">
+            <button type="button" onclick="runSearch()">
                 Run Algorithm
             </button>
         </section>
-        
-</section>
 
-<section class="graph-canvas">
-    <h2>Graph Visualization</h2>
-
-    <canvas id="graphCanvas" width="1000" height="500"></canvas>
-</section>
-
-<section class="visualizer-card">
+        <section class="graph-canvas" aria-labelledby="graphVisualizationTitle">
+            <h2 id="graphVisualizationTitle">Graph Visualization</h2>
+            <canvas id="graphCanvas" width="1000" height="500" role="img" aria-label="Graph algorithm visualization"></canvas>
+        </section>
 
         <section class="visualizer-card">
 
             <h2>Traversal Order</h2>
 
-            <div id="traversalOutput">
-
+            <div id="traversalOutput" aria-live="polite">
                 Waiting for execution...
-
             </div>
 
         </section>
 
-        <section class="results-grid">
+        <section class="results-grid" aria-label="Search results">
 
             <div class="result-card">
-
                 <h3>Visited Nodes</h3>
-
-                <span id="visitedCount">0</span>
-
+                <span id="visitedCount" aria-live="polite">0</span>
             </div>
 
             <div class="result-card">
-
                 <h3>Path</h3>
-
-                <span id="pathOutput">-</span>
-
+                <span id="pathOutput" aria-live="polite">-</span>
             </div>
 
             <div class="result-card">
-
                 <h3>Path Cost</h3>
-
-                <span id="pathCost">0</span>
-
+                <span id="pathCost" aria-live="polite">0</span>
             </div>
 
             <div class="result-card">
-
                 <h3>Execution Time</h3>
-
-                <span id="executionTime">0 ms</span>
-
+                <span id="executionTime" aria-live="polite">0 ms</span>
             </div>
 
         </section>
 
         <section class="algorithm-details">
-
             <h2>Algorithm Explanation</h2>
-
-            <div id="algorithmExplanation">
-
-                Select an algorithm to view explanation.
-
-            </div>
-
+            <div id="algorithmExplanation">Select an algorithm to view explanation.</div>
         </section>
 
         <section class="algorithm-details">
-
             <h2>Graph Information</h2>
-
-            <div id="graphInfo">
-
-                Load a graph and execute an algorithm.
-
-            </div>
-
+            <div id="graphInfo" aria-live="polite">Load a graph and execute an algorithm.</div>
         </section>
 
     </main>
@@ -248,6 +202,7 @@
 </div>
 
 <script src="../js/search.js"></script>
+<script src="../js/search-import.js"></script>
 
 </body>
 

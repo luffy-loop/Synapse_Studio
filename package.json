@@ -1,0 +1,6 @@
+{
+  "name":"synapse-studio",
+  "private":true,
+  "scripts":{"test":"jest --runInBand"},
+  "devDependencies":{"jest":"^30.0.0"}
+}

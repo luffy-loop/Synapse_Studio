@@ -9,188 +9,69 @@
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-<!-- Opening Experience -->
 <section class="intro-screen" id="introScreen">
     <div class="intro-glow"></div>
-
     <div class="intro-content">
         <div class="intro-eyebrow">COMPUTATIONAL EXPLORATION</div>
-
-        <h1>
-            Welcome to
-            <span>Synapse.</span>
-        </h1>
-
-        <p>
-            An interactive space to understand algorithms,
-            visualize their behavior, and explore how they work.
-        </p>
-        <div class="intro-status">
-    <span class="status-dot"></span>
-    <span>EXPERIENCE READY</span>
-</div>
-        <button class="enter-button" onclick="enterSynapse()">
-            <span>Enter Synapse</span>
-            <span class="enter-arrow">→</span>
-        </button>
+        <h1>Welcome to <span>Synapse.</span></h1>
+        <p>An interactive space to understand algorithms, visualize their behavior, and explore how they work.</p>
+        <div class="intro-status"><span class="status-dot"></span><span>EXPERIENCE READY</span></div>
+        <button class="enter-button" onclick="enterSynapse()"><span>Enter Synapse</span><span class="enter-arrow">→</span></button>
     </div>
-
-    <div class="intro-footer">
-        <span>ALGORITHM STUDIO</span>
-        <span>01 / 01</span>
-    </div>
+    <div class="intro-footer"><span>ALGORITHM STUDIO</span><span>01 / 01</span></div>
 </section>
-
 <script>
-    function enterSynapse() {
-        const intro = document.getElementById("introScreen");
-
-        intro.classList.add("intro-exit");
-        document.body.classList.remove("intro-active");
-
-        setTimeout(() => {
-            intro.style.display = "none";
-        }, 800);
-    }
+function enterSynapse(){const intro=document.getElementById("introScreen");intro.classList.add("intro-exit");document.body.classList.remove("intro-active");setTimeout(()=>{intro.style.display="none"},800)}
 </script>
 <div class="app-container">
-
     <aside class="sidebar">
-
-        <div class="logo">
-            <h1>Synapse</h1>
-            <p>Algorithm Studio</p>
-        </div>
-
+        <div class="logo"><h1>Synapse</h1><p>Algorithm Studio</p></div>
         <nav>
-
-            <a href="index.html" class="active">
-                Dashboard
-            </a>
-
-            <a href="pages/sorting.html">
-                Sorting
-            </a>
-
-            <a href="pages/search.html">
-                Search
-            </a>
-
-            <a href="pages/searching.html">
-                Searching
-            </a>
-
-            <a href="pages/compare.html">
-                Compare
-            </a>
-
-            <a href="pages/library.html">
-                Library
-            </a>
-
-            <a href="pages/about.html">
-                About
-            </a>
-
+            <a href="index.html" class="active">Dashboard</a>
+            <a href="pages/sorting.html">Sorting</a>
+            <a href="pages/search.html">Search</a>
+            <a href="pages/searching.html">Searching</a>
+            <a href="pages/compare.html">Compare</a>
+            <a href="pages/library.html">Library</a>
+            <a href="pages/graph-lab.html">Graph Lab</a>
+            <a href="pages/about.html">About</a>
         </nav>
-
     </aside>
-
     <main class="main-content">
-
         <section class="hero">
-
             <h1>Visualize • Compare • Master Algorithms</h1>
-
-            <p>
-                Interactive learning platform for sorting,
-                searching, graph traversal and AI search
-                algorithms.
-            </p>
-
-            <a href="pages/sorting.html" class="cta-btn">
-                Start Exploring
-            </a>
-
+            <p>Interactive learning platform for sorting, searching, graph traversal and AI search algorithms.</p>
+            <a href="pages/sorting.html" class="cta-btn">Start Exploring</a>
         </section>
-
         <section class="cards">
-
             <div class="card">
-
                 <h2>Sorting Algorithms</h2>
-
-                <p>
-                    Bubble, Selection, Insertion,
-                    Merge and Quick Sort
-                </p>
-
-                <a href="pages/sorting.html">
-                    Open →
-                </a>
-
+                <p>Bubble, Selection, Insertion, Merge and Quick Sort</p>
+                <a href="pages/sorting.html">Open →</a>
             </div>
-
             <div class="card">
-
                 <h2>Search Algorithms</h2>
-
-                <p>
-                    BFS, DFS, UCS,
-                    Greedy Search and A*
-                </p>
-
-                <a href="pages/search.html">
-                    Open →
-                </a>
-
+                <p>BFS, DFS, UCS, Greedy Search and A*</p>
+                <a href="pages/search.html">Open →</a>
             </div>
-
             <div class="card">
-
                 <h2>Searching Algorithms</h2>
-
-                <p>
-                    Linear Search
-                    and Binary Search
-                </p>
-
-                <a href="pages/searching.html">
-                    Open →
-                </a>
-
+                <p>Linear Search and Binary Search</p>
+                <a href="pages/searching.html">Open →</a>
             </div>
-
+            <div class="card">
+                <h2>Graph Lab</h2>
+                <p>Build custom graphs, edit edge weights and send them to search algorithms.</p>
+                <a href="pages/graph-lab.html">Open →</a>
+            </div>
         </section>
-
         <section class="stats">
-
-            <div class="stat-box">
-                <h2>12</h2>
-                <p>Total Algorithms</p>
-            </div>
-
-            <div class="stat-box">
-                <h2>5</h2>
-                <p>Sorting</p>
-            </div>
-
-            <div class="stat-box">
-                <h2>5</h2>
-                <p>Search</p>
-            </div>
-
-            <div class="stat-box">
-                <h2>2</h2>
-                <p>Searching</p>
-            </div>
-
+            <div class="stat-box"><h2>12</h2><p>Total Algorithms</p></div>
+            <div class="stat-box"><h2>5</h2><p>Sorting</p></div>
+            <div class="stat-box"><h2>5</h2><p>Search</p></div>
+            <div class="stat-box"><h2>2</h2><p>Searching</p></div>
         </section>
-
     </main>
-
 </div>
-
-
 </body>
 </html>

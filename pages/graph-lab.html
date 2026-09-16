@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse | Graph Lab</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/graph-lab.css">
+</head>
+<body>
+<div class="app-container">
+    <aside class="sidebar" aria-label="Main navigation">
+        <div class="logo">
+            <h1>Synapse</h1>
+            <p>Algorithm Studio</p>
+        </div>
+        <nav>
+            <a href="../index.html">Dashboard</a>
+            <a href="sorting.html">Sorting</a>
+            <a href="search.html">Search</a>
+            <a href="searching.html">Searching</a>
+            <a href="compare.html">Compare</a>
+            <a href="library.html">Library</a>
+            <a href="graph-lab.html" class="active" aria-current="page">Graph Lab</a>
+            <a href="about.html">About</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <section class="page-header">
+            <h1>Graph Lab</h1>
+            <p>Build a graph visually, edit edge weights, and prepare custom graphs for BFS, DFS, UCS, Greedy Search, and A*.</p>
+        </section>
+
+        <section class="lab-toolbar" aria-label="Graph controls">
+            <div>
+                <span class="lab-label">Interaction</span>
+                <p>Click empty space to add a node. Click two nodes to connect them.</p>
+            </div>
+            <div class="lab-actions">
+                <button type="button" onclick="clearGraph()">Clear</button>
+                <button type="button" onclick="loadDemoGraph()">Load Demo</button>
+            </div>
+        </section>
+
+        <section class="graph-editor" aria-labelledby="graphEditorTitle">
+            <h2 id="graphEditorTitle" class="sr-only">Interactive Graph Editor</h2>
+            <canvas id="labCanvas" width="1100" height="560" role="img" aria-label="Interactive graph editor. Click empty space to add nodes and click two nodes to connect them."></canvas>
+        </section>
+
+        <section class="lab-bottom">
+            <div class="glass-card">
+                <h2>Selected Edge</h2>
+                <p id="edgeStatus" aria-live="polite">Select two nodes to create an edge.</p>
+                <button type="button" id="weightButton" onclick="editSelectedEdge()" disabled aria-label="Edit selected edge weight">Edit Weight</button>
+            </div>
+            <div class="glass-card">
+                <h2>Graph Data</h2>
+                <textarea id="graphData" readonly aria-label="Generated graph data"></textarea>
+                <button type="button" onclick="copyGraphData()">Copy Graph Data</button>
+                <button type="button" onclick="useInSearch()">Use in Search</button>
+            </div>
+        </section>
+
+        <section class="lab-help" aria-label="Graph Lab tip">
+            <strong>Tip:</strong> Use positive weights for UCS and A*. The exported format is <code>A-B-3</code>, one edge per line.
+        </section>
+    </main>
+</div>
+<script src="../js/graph-lab.js"></script>
+</body>
+</html>

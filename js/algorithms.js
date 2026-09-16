@@ -1,0 +1,10 @@
+function bubbleSort(a){a=[...a];for(let i=0;i<a.length;i++)for(let j=0;j<a.length-i-1;j++)if(a[j]>a[j+1])[a[j],a[j+1]]=[a[j+1],a[j]];return a}
+function selectionSort(a){a=[...a];for(let i=0;i<a.length;i++){let m=i;for(let j=i+1;j<a.length;j++)if(a[j]<a[m])m=j;[a[i],a[m]]=[a[m],a[i]]}return a}
+function insertionSort(a){a=[...a];for(let i=1;i<a.length;i++){let k=a[i],j=i-1;while(j>=0&&a[j]>k){a[j+1]=a[j];j--}a[j+1]=k}return a}
+function mergeSort(a){if(a.length<2)return [...a];let m=Math.floor(a.length/2),l=mergeSort(a.slice(0,m)),r=mergeSort(a.slice(m)),o=[];while(l.length&&r.length)o.push(l[0]<=r[0]?l.shift():r.shift());return o.concat(l,r)}
+function quickSort(a){a=[...a];function q(l,r){if(l>=r)return;let p=a[r],i=l;for(let j=l;j<r;j++)if(a[j]<p){[a[i],a[j]]=[a[j],a[i]];i++}[a[i],a[r]]=[a[r],a[i]];q(l,i-1);q(i+1,r)}q(0,a.length-1);return a}
+function bfs(g,s,t){let q=[s],v=new Set([s]),p={};while(q.length){let u=q.shift();if(u===t)break;for(let x of g[u]||[])if(!v.has(x.to)){v.add(x.to);p[x.to]=u;q.push(x.to)}}return path(p,s,t)}
+function dfs(g,s,t){let v=new Set(),p={};function d(u){if(v.has(u))return false;v.add(u);if(u===t)return true;for(let x of g[u]||[]){if(!v.has(x.to)){p[x.to]=u;if(d(x.to))return true}}return false}d(s);return path(p,s,t)}
+function ucs(g,s,t){let q=[[0,s]],d={[s]:0},p={};while(q.length){q.sort((a,b)=>a[0]-b[0]);let [c,u]=q.shift();if(c!==d[u])continue;if(u===t)return path(p,s,t);for(let x of g[u]||[]){let n=c+x.cost;if(d[x.to]===undefined||n<d[x.to]){d[x.to]=n;p[x.to]=u;q.push([n,x.to])}}}return []}
+function path(p,s,t){let a=[];if(s!==t&&p[t]===undefined)return [];for(let u=t;u!==undefined;u=p[u]){a.push(u);if(u===s)break}return a.reverse()}
+if(typeof module!=="undefined")module.exports={bubbleSort,selectionSort,insertionSort,mergeSort,quickSort,bfs,dfs,ucs};
